@@ -1,0 +1,57 @@
+﻿@using LogGrabber.Web.ViewModels;
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Authorization";
+}
+
+<section class="page-container">
+
+    <div class="center center-640">
+
+        <div class="module module--white">
+
+            <header class="module__header module__header--grey">
+                <h1 class="heading-size-4">@ViewData["Title"]</h1>
+            </header>
+
+
+            <div class="module__body">
+                <div class="module-content module-content--padding-horizontal module-content--padding-top">
+                    <form asp-controller="Account" asp-action="Login" method="post" class="form-auth" novalidate="novalidate">
+                        <div class="input-section input-text">
+
+                            <div class="form-group">
+                                <label asp-for="UserName" class="form-group__label">User name</label>
+                                <div class="input-wrapper">
+                                    <input asp-for="UserName" autofocus="" class="input-style valid" placeholder="Enter user name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-section input-password">
+
+                            <div class="form-group">
+                                <label asp-for="Password" class="form-group__label">Password</label>
+                                <div class="input-wrapper">
+                                    <input asp-for="Password" autofocus="" class="input-style valid" placeholder="Enter password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-section input-submit">
+                            @*<input type="submit" value="Sign In" />*@
+                            <button class="button button-40 button-block button-blue button-before button-after" aria-autocomplete="off">
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="module__footer">
+                
+            </div>
+        </div>
+    </div>
+
+</section>
+

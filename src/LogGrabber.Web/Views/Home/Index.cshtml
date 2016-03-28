@@ -1,0 +1,152 @@
+﻿@using LogGrabber
+@model IEnumerable<LogItem>
+
+@{
+    ViewData["Title"] = "Logs";
+}
+
+<div>
+
+    <div class="page-container">
+        <div class="center center-full">
+            <div id="errorGroupList">
+                <div id="js-module-table">
+                    <div id="error-group-filters"></div>
+                    <div id="error-group-list-tabs">
+                        <ul class="module-tabs clearfix">
+                            @foreach (var pair in new Dictionary<Status, string>
+                            {
+                                { Status.Critical, "red" },
+                                { Status.Warning, "yellow"},
+                                { Status.Info, "green"},
+                                { Status.Debug, "blue"},
+                            })
+                            {
+                                var active = pair.Key == ViewBag.CurrentStatus
+                                    ? "js-active-tab is-active"
+                                    : "js-resolved-tab";
+
+                                <li class="module-tab is-@pair.Value js-tab @active">
+                                    <a asp-controller="Home" asp-action="Index" asp-route-id="@((int)pair.Key)">
+                                        <span class="tab-content has-count">
+                                            <span class="tab-count is-@pair.Value">
+                                                @Model.Count(i => i.Status == pair.Key)
+                                            </span>
+                                            <span class="tab-text">@pair.Key.ToString()</span>
+                                        </span>
+                                    </a>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="module module--white">
+                        <div class="module-content module-content--padding-top">
+                            <div id="error-group-list-header">
+                                <div>
+                                    <table class="table--standard table--fixed">
+                                        <thead class="js-table__heading">
+                                            <tr class="table-controls">
+                                                <th class="table__cell--gutter"></th>
+                                                
+                                                <th class="overview-table-mob table__cell--standard js-sort">
+                                                    Exception
+                                                </th>
+                                                <th class="hide-min table__cell-control js-sort ">
+                                                    <span class="table__sort-text">
+                                                        Description
+                                                        <span class="flat-icon icon-16 timedesc-icon"></span>
+                                                    </span>
+                                                </th>
+                                                <th class="hide-min table__cell-control js-sort ">
+                                                    <span class="table__sort-text">
+                                                        <span class="flat-icon icon-16 timedesc-icon"></span>
+                                                    </span>
+                                                </th>
+                                                <th class="hide-min table__cell-control table__cell-160 js-sort ">
+                                                    <span class="table__sort-text">
+                                                        Application
+                                                        <span class="flat-icon icon-16 timedesc-icon"></span>
+                                                    </span>
+                                                </th>
+                                                <th class="hide-min table__cell-control table__cell-160 js-sort ">
+                                                    <span class="table__sort-text">
+                                                        Time occurred
+                                                        <span class="flat-icon icon-16 timedesc-icon"></span>
+                                                    </span>
+                                                </th>
+                                                <th class="hide-min table__cell-control table__cell-120 js-sort ">
+                                                    <span class="table__sort-text">
+                                                        Count
+                                                        <span class="flat-icon icon-16 timedesc-icon"></span>
+                                                    </span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="error-group-list">
+                                <table class="table--standard table--fixed">
+                                    <tbody>
+                                    @foreach (var item in Model
+                                        .Where(i => i.Status == ViewBag.CurrentStatus)
+                                        .GroupBy(i => new
+                                        {
+                                            i.Error.Name,
+                                            i.Error.CallStack,
+                                            Application = i.Application.Name
+                                        })
+                                        .Select(g => new
+                                        {
+                                            g.Key.Name,
+                                            g.Key.Application,
+                                            g.Key.CallStack,
+                                            Occured = g.Max(i => i.Occured),
+                                            Count = g.Count()
+                                        }))
+                                    {
+                                        <tr class="js-row">
+                                            <!-- Checkbox -->
+                                            <td class="table__cell--gutter"></td>
+
+                                            <!--Mobile cell -->
+                                            <td class="overview-table-mob table__cell--standard">
+                                                <a class="overview-table__cell clearfix" href="#">
+                                                    <span class="overview-cell-message text-ellipsis">@item.Name</span>
+                                                    <span class="overview-cell-time text-red">@item.Application</span>
+                                                    <span class="overview-cell-count text-red">1</span>
+                                                </a>
+                                            </td>
+
+                                            <!-- normal cells -->
+                                            <td class="hide-min table__cell--message">
+                                                <a class="text-ellipsis" href="#">
+                                                    <span class="text-blue">@item.CallStack</span></a></td>
+                                            <td class="hide-min table__cell--standard table__cell-160">
+                                                <span class="text-black">@item.Name</span>
+                                            </td>
+                                            <td class="hide-min table__cell--standard table__cell-160">
+                                                <span class="text-black">@item.Application</span>
+                                            </td>
+                                            <td class="hide-min table__cell--standard table__cell-160">
+                                                <span class="text-red" title="@item.Occured.ToString(@"U")">@item.Occured.ToString(@"dd MMM HH:mm:ss")</span></td>
+                                            <td class="hide-min table__cell--standard table__cell-120"><span class="text-red">@item.Count</span></td>
+
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="module__footer">
+                            <div id="error-group-list-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

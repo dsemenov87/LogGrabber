@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewData["Title"]</title>
+
+    <link href="~/vendor.css" type="text/css" rel="stylesheet">
+    <link href="~/screen.css" type="text/css" rel="stylesheet" media="screen">
+    <link href="~/vendor-custom.css" type="text/css" rel="stylesheet" media="screen">
+
+    <!--<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/Content/Images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Content/Images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Content/Images/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Content/Images/apple-touch-icon-144x144.png">
+    -->
+</head>
+<body class="layout">
+
+    <div id="lightningjs-wootric" style="display: none;"><div><iframe frameborder="0" id="lightningjs-frame-wootric"></iframe></div></div>
+
+    <div class="modal-overlay js-overlay" id="rgDialog"></div>
+
+    <div class="layout__header layout__header--blue" id="rgHeading">
+        <div>
+            <div class="raygun-header">
+                <div class="raygun-header__user" id="right-controls-region">
+                    <div>
+                        <!-- user dropdown -->
+                        <div class="dropdown2">
+
+                            <!-- user dropdown button -->
+                            <div class="dropdown2__button">
+                                <div class="user-button js-user-dropdown-button">
+                                    <div class="user-button__indicator">
+                                        <span class="user-indicator"></span>
+                                    </div>
+                                    <div class="user-button__avatar">
+                                        <img class="avatar avatar-24 icon-before" src="https://www.gravatar.com/avatar/70fb6f5c92e4570dd3f5da0cd7188a93?d=mm&amp;r=pg&amp;s=24">
+                                    </div>
+                                    <div class="user-button__username">
+                                        <strong>Dmitry Semenov</strong>
+                                    </div>
+                                    @*<div class="user-button__arrow">
+                                        <span class="flat-icon icon-16 dropdown-icon"></span>
+                                    </div>*@
+                                </div>
+                            </div>
+
+
+                            <!-- dropdown -->
+                            <div class="dropdown2__content dropdown2__content--dock-right js-user-dropdown-content">
+
+                                <div class="dropdown2-section">
+                                    <div class="dropdown2-section__title">
+                                        Connected plan:
+                                    </div>
+
+                                    <!-- plans -->
+                                    <div class="dropdown2-section__plans js-plan-container">
+                                        <div>
+                                            <!-- .dropdown2-plan--oversize -->
+                                            <a class="dropdown2-plan" href="/plan/jjrxp4">
+                                                <div class="dropdown2-plan__icon">
+                                                    <span class="avatar avatar-24 avatar--circle">
+                                                        <img src="https://www.gravatar.com/avatar/70fb6f5c92e4570dd3f5da0cd7188a93?d=mm&amp;r=pg&amp;s=24">
+                                                    </span>
+                                                </div>
+                                                <div class="dropdown2-plan__name">Dmitry Semenov</div>
+                                                <ul class="dropdown2-plan__details">
+                                                    <!--<li class="text-grey text-italic">0 Product</li>-->
+                                                    <li class="text-grey text-italic">1 Application</li>
+                                                    <li class="text-grey text-italic">1 Member</li>
+                                                </ul>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="dropdown2-section">
+                                    <div class="dropdown2-section__title">
+                                        My options:
+                                    </div>
+                                    <!-- user options -->
+
+                                    <a class="dropdown2-section__option" href="/mydashboard">
+                                        <div class="text-icon text-icon--16">
+                                            <div class="text-icon__icon">
+                                                <span class="flat-icon icon-16 globe-icon"></span>
+                                            </div>
+                                            <div class="text-icon__text">
+                                                Global dashboard
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown2-section__option" href="/auditlog">
+                                        <div class="text-icon text-icon--16">
+                                            <div class="text-icon__icon">
+                                                <span class="flat-icon icon-16 auditlog-icon"></span>
+                                            </div>
+                                            <div class="text-icon__text">
+                                                Audit log
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown2-section__option" href="/user/notifications">
+                                        <div class="text-icon text-icon--16">
+                                            <div class="text-icon__icon">
+                                                <span class="flat-icon icon-16 bell-icon"></span>
+                                            </div>
+                                            <div class="text-icon__text">
+                                                My notifications
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown2-section__option" href="/user">
+                                        <div class="text-icon text-icon--16">
+                                            <div class="text-icon__icon">
+                                                <span class="flat-icon icon-16 cog-icon"></span>
+                                            </div>
+                                            <div class="text-icon__text">
+                                                My settings
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown2-section__option" href="/s/createapp">
+                                        <div class="text-icon text-icon--16">
+                                            <div class="text-icon__icon">
+                                                <span class="flat-icon icon-16 addapplication-icon"></span>
+                                            </div>
+                                            <div class="text-icon__text">
+                                                Create new application
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="dropdown2-section">
+                                    <a class="dropdown2-section__option js-logout-link">
+                                        <div class="text-icon text-icon--16">
+                                            <div class="text-icon__icon">
+                                                <span class="flat-icon icon-16 logout-icon"></span>
+                                            </div>
+                                            <div class="text-icon__text">
+                                                Sign out
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout__applications" id="application-switcher-region"></div>
+
+    <div class="layout__content">
+        @RenderBody()
+    </div>
+
+    <!-- page footer -->
+    <footer class="layout__footer">
+        <div class="footer-container">
+            <div class="center center-max">
+
+                <div class="footer-content">
+                    <div class="footer-content__secondary">
+                        &copy; 2016
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

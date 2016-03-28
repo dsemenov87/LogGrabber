@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0-*",
+  "description": "TestApp Console Application",
+  "authors": [ "dseme" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "LogGrabber.Client": "1.0.0-*"
+  },
+
+  "commands": {
+    "TestApp": "TestApp"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}
