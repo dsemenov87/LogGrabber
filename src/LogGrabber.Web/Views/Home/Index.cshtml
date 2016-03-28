@@ -59,8 +59,15 @@
                                                         <span class="flat-icon icon-16 timedesc-icon"></span>
                                                     </span>
                                                 </th>
-                                                <th class="hide-min table__cell-control js-sort ">
+                                                <th class="hide-min table__cell-control table__cell-160 js-sort ">
                                                     <span class="table__sort-text">
+                                                        Exception
+                                                        <span class="flat-icon icon-16 timedesc-icon"></span>
+                                                    </span>
+                                                </th>
+                                                <th class="hide-min table__cell-control table__cell-160 js-sort ">
+                                                    <span class="table__sort-text">
+                                                        Message
                                                         <span class="flat-icon icon-16 timedesc-icon"></span>
                                                     </span>
                                                 </th>
@@ -92,17 +99,19 @@
                                     <tbody>
                                     @foreach (var item in Model
                                         .Where(i => i.Status == ViewBag.CurrentStatus)
+                                        .OrderByDescending(i => i.Occured)
                                         .GroupBy(i => new
                                         {
                                             i.Error.Name,
-                                            i.Error.CallStack,
+                                            i.Error.Message,
                                             Application = i.Application.Name
                                         })
                                         .Select(g => new
                                         {
                                             g.Key.Name,
+                                            g.Key.Message,
                                             g.Key.Application,
-                                            g.Key.CallStack,
+                                            StackTrace = string.Join("\n\n", g.Select(i => i.Error.CallStack)),
                                             Occured = g.Max(i => i.Occured),
                                             Count = g.Count()
                                         }))
@@ -123,9 +132,15 @@
                                             <!-- normal cells -->
                                             <td class="hide-min table__cell--message">
                                                 <a class="text-ellipsis" href="#">
-                                                    <span class="text-blue">@item.CallStack</span></a></td>
+                                                    <span class="text-blue" title="@item.StackTrace">
+                                                        @item.StackTrace
+                                                    </span>
+                                                </a></td>
                                             <td class="hide-min table__cell--standard table__cell-160">
                                                 <span class="text-black">@item.Name</span>
+                                            </td>
+                                            <td class="hide-min table__cell--standard table__cell-160">
+                                                <span class="text-black">@item.Message</span>
                                             </td>
                                             <td class="hide-min table__cell--standard table__cell-160">
                                                 <span class="text-black">@item.Application</span>

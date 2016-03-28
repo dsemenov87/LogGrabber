@@ -44,19 +44,19 @@ namespace LogGrabber
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-
             app.UseCookieAuthentication(options =>
             {
                 options.AuthenticationScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.LoginPath = new PathString("/Account/Login");
                 options.AutomaticAuthenticate = true;
                 options.AutomaticChallenge = true;
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
 

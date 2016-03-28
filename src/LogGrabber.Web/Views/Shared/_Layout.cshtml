@@ -39,7 +39,8 @@
                                         <img class="avatar avatar-24 icon-before" src="https://www.gravatar.com/avatar/70fb6f5c92e4570dd3f5da0cd7188a93?d=mm&amp;r=pg&amp;s=24">
                                     </div>
                                     <div class="user-button__username">
-                                        <strong>Dmitry Semenov</strong>
+                                        <strong onclick="document.getElementById('loginLink').click()">@ViewBag.CurrentUserName</strong>
+                                        <a id="loginLink" asp-controller="Account" asp-action="Login" style="display: none"></a>
                                     </div>
                                     @*<div class="user-button__arrow">
                                         <span class="flat-icon icon-16 dropdown-icon"></span>

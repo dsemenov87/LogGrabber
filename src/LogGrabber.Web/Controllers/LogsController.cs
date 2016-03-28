@@ -28,7 +28,7 @@ namespace LogGrabber.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] LogItem item)
         {
-            if (item == null)
+            if (item == null || !(await EnsureUser(item.User)))
             {
                 return HttpBadRequest();
             }
@@ -48,7 +48,9 @@ namespace LogGrabber.Web.Controllers
             if (item == null) return null;
 
             var existedError = await Context.Errors
-                .FirstOrDefaultAsync(err => err.Name == item.Name);
+                .FirstOrDefaultAsync(err =>
+                    err.Name == item.Name &&
+                    err.Message == item.Message);
 
             return existedError ?? Context.Errors.Add(item).Entity;
         }
@@ -57,10 +59,27 @@ namespace LogGrabber.Web.Controllers
         {
             if (item == null) return null;
 
-            var existedError = await Context.Applications
+            var existedApp = await Context.Applications
                 .FirstOrDefaultAsync(a => a.Name == item.Name);
 
-            return existedError ?? Context.Applications.Add(item).Entity;
+            return existedApp ?? Context.Applications.Add(item).Entity;
+        }
+
+        private async Task<bool> EnsureUser(User user)
+        {
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Id = await Context.Users
+                .Where(u =>
+                    string.Equals(u.Name, user.Name) &&
+                    string.Equals(u.Password, user.Password))
+                .Select(u => u.Id)
+                .FirstOrDefaultAsync();
+
+            return true;
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using LogGrabber.Client;
 using System;
+using System.Threading;
 
 namespace TestApp
 {
@@ -22,21 +23,20 @@ namespace TestApp
             }
         }
 
-        static LogGrabberClient _client = new LogGrabberClient(new Uri("http://localhost:49614/api/logs"));
+        static LogGrabberClient _logGrabberClient
+            = new LogGrabberClient(new Uri("http://localhost:49614/api/logs"), "Dmitry", "123");
 
         public static void Main(string[] args)
         {
             try
             {
-                throw new MyCustomException("Test error");
+                throw new MyCustomException("AAAAAAAAA!!!!!!");
             }
             catch (MyCustomException ex)
             {
-                _client.Send("Error detected", ex);
+                _logGrabberClient.Send("Error detected", ex);
             }
-            while (true)
-            {
-            }
+            Thread.Sleep(1000);
         }
     }
 }
