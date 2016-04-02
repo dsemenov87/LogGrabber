@@ -1,6 +1,6 @@
 # LogGrabber
 
-Реализация системы для сбора логов
-аналогичная https://raygun.io/. Принимает информацию по HTTP.
-Умеет показывать эти логи на веб-сайте
-как рейган. Доступ к логам осуществляется по логину/паролю.
+The implementation of the system for collecting logs
+similar to https://raygun.io/. It receives information over HTTP.
+And able to display these logs on the website.
+Access to the logs is carried by login / password.
