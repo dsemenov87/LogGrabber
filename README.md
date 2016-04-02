@@ -13,7 +13,7 @@ Uses ASP.NET5 (DNX 4.5.1 and DNX Core 5.0 schould be installed):
 
 * https://docs.asp.net/en/latest/getting-started/index.html
 * before starting a web application, it is necessary to create the database. Enter in *PowerShell* as follows:
-```ps
+```bash
 cd /YourProjectPath/LogGrabber/src/LogGrabber.Web
 dnu restore
 dnx ef database update
