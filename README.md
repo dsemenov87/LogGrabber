@@ -9,7 +9,7 @@ Access to the logs is carried by login / password.
 
 ### Requirements ###
 
-Uses ASP.NET5 (DNX 4.5.1 and DNX Core 5.0 scould be installed):
+Uses ASP.NET5 (DNX 4.5.1 and DNX Core 5.0 schould be installed):
 
 * https://docs.asp.net/en/latest/getting-started/index.html
 
